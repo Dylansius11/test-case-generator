@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --background: #09090b;
+  --surface: #111113;
+  --surface-elevated: #18181b;
+  --border: #27272a;
+  --border-subtle: #1c1c1f;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --accent: #22c55e;
+  --accent-dim: rgba(34, 197, 94, 0.12);
+  --accent-glow: rgba(34, 197, 94, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Code area */
+.code-area {
+  font-family: var(--font-geist-mono), 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+/* Subtle animated border for the main card */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(34,197,94,0.25), rgba(34,197,94,0.05), transparent, rgba(34,197,94,0.05));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Shimmer animation for loading state */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface-elevated) 25%,
+    #2a2a30 50%,
+    var(--surface-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease infinite;
+}
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+/* Slide up entrance */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide-up-delay-1 { animation-delay: 0.05s; }
+.slide-up-delay-2 { animation-delay: 0.1s; }
+.slide-up-delay-3 { animation-delay: 0.15s; }
+.slide-up-delay-4 { animation-delay: 0.2s; }
